@@ -1,0 +1,57 @@
+# Flutter
+.dart_tool/
+
+.packages
+build/
+
+# iOS
+**/ios/**/Flutter/.last_build_id
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Pods/
+
+# Android
+**/android/**/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/**/GeneratedPluginRegistrant.java
+**/android/**/GeneratedPluginRegistrant.kt
+
+# macOS
+**/macos/**/Pods/
+
+# VS Code
+.vscode/
+
+# IntelliJ
+.idea/
+
+# Miscellaneous
+*.iml
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Firebase
+google-services.json
+GoogleService-Info.plist
+
+# Environment
+.env
+.env.*
+
+# Keystore
+*.jks
+*.keystore
+key.properties
+
+# Coverage
+coverage/
+
+# Testing
+.test_coverage.dart
