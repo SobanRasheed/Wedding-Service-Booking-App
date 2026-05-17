@@ -1,15 +1,30 @@
-DEPLOYMENT GUIDE - Shaadi Kro App
-===================================
+DEPLOYMENT GUIDE - Shaadi Kro App (Semester Project)
+=====================================================
 
-This guide provides step-by-step instructions to deploy your Flutter app to Google Play Store.
+MVC ARCHITECTURE IMPLEMENTATION
+-------------------------------
+
+This project follows the MVC (Model-View-Controller) architectural pattern.
+See MVC_ARCHITECTURE.md for detailed documentation.
+
+Project Structure:
+- models/      → Data structures (ProfileModel, etc.)
+- views/       → UI layer (screens/, widgets/)
+- controllers/ → Business logic (AuthController, ProfileController)
+- services/    → Data access (AuthService, FirestoreService)
+- providers/   → State management bridge
+
+IMPORTANT: This is a SEMESTER PROJECT and is NOT intended for Google Play Store deployment.
+Build APK files for LOCAL TESTING AND DEMONSTRATION PURPOSES ONLY.
 
 PREREQUISITES
 -------------
 1. Flutter SDK installed (3.0.0+)
 2. Android Studio or VS Code
-3. Google Play Console Developer Account ($25 one-time fee)
-4. Firebase Project created
-5. Keystore file for signing
+3. Firebase Project created
+4. Android device or emulator for testing
+
+NOTE: No Google Play Console account or keystore signing required for semester project!
 
 STEP 1: FIREBASE SETUP
 ----------------------
@@ -110,8 +125,13 @@ STEP 2: ANDROID CONFIGURATION
        repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
    }
 
-STEP 3: GENERATE KEYSTORE
---------------------------
+STEP 3: GENERATE KEYSTORE (OPTIONAL - SKIP FOR SEMESTER PROJECT)
+-----------------------------------------------------------------
+
+NOTE: For semester project, you can SKIP this step entirely!
+      The debug signing configuration is sufficient for testing and demonstration.
+
+If you still want to generate a keystore for learning purposes:
 
 1. Generate Upload Key
    
@@ -127,8 +147,13 @@ STEP 3: GENERATE KEYSTORE
 
 2. Backup your keystore securely! You'll need it for every update.
 
-STEP 4: CONFIGURE SIGNING
---------------------------
+STEP 4: CONFIGURE SIGNING (OPTIONAL - SKIP FOR SEMESTER PROJECT)
+-----------------------------------------------------------------
+
+NOTE: Skip this step for semester project!
+      Your app will use the default debug signing which works perfectly for testing.
+
+If you completed Step 3 and want to configure signing:
 
 1. Create android/key.properties (DO NOT COMMIT TO GIT)
 
@@ -188,8 +213,8 @@ STEP 5: UPDATE APP METADATA
 3. Update app name in android/app/src/main/AndroidManifest.xml
    <application android:label="Shaadi Kro" ...>
 
-STEP 6: BUILD RELEASE
----------------------
+STEP 6: BUILD RELEASE APK FOR TESTING
+--------------------------------------
 
 1. Clean and get dependencies
    ```bash
@@ -197,119 +222,56 @@ STEP 6: BUILD RELEASE
    flutter pub get
    ```
 
-2. Build APK (for testing)
+2. Build Debug APK (for development testing)
+   ```bash
+   flutter build apk --debug
+   ```
+   Output: build/app/outputs/flutter-apk/app-debug.apk
+   
+   OR
+
+3. Build Release APK (for final demo/presentation)
    ```bash
    flutter build apk --release
    ```
    Output: build/app/outputs/flutter-apk/app-release.apk
 
-3. Build App Bundle (for Play Store - RECOMMENDED)
-   ```bash
-   flutter build appbundle --release
-   ```
-   Output: build/app/outputs/bundle/release/app-release.aab
+4. Install on Device/Emulator
+   - Connect your Android device via USB (enable USB debugging)
+   - Or start an Android emulator from Android Studio
+   - Run: `flutter run`
+   - Or manually install the APK: `adb install build/app/outputs/flutter-apk/app-release.apk`
 
-STEP 7: GOOGLE PLAY CONSOLE SETUP
-----------------------------------
+NOTE: For semester project, you do NOT need to build App Bundle (.aab) or upload to Play Store!
 
-1. Create Google Play Console Account
-   - Go to https://play.google.com/console
-   - Pay $25 registration fee
-   - Complete developer profile
+STEP 7: TESTING & DEMONSTRATION
+--------------------------------
 
-2. Create New App
-   - Click "Create app"
-   - App name: Shaadi Kro
-   - Default language: English (United States)
-   - App or game: App
-   - Free or paid: Free (or Paid)
-   - Accept policies
+1. Test on Emulator
+   - Open Android Studio
+   - Go to AVD Manager
+   - Create/start a virtual device
+   - Run: `flutter run`
 
-3. Set Up App Content
-   
-   a. Privacy Policy
-      - Create a privacy policy page (use generator tools)
-      - Host on website or use free hosting
-      - Add URL in Play Console
-   
-   b. App Access
-      - Select "All or some functionality is restricted"
-      - Provide demo credentials if needed
-   
-   c. Ads
-      - Select "No" if no ads
-   
-   d. Content Rating
-      - Complete questionnaire
-      - Expected rating: Teen or Mature
-   
-   e. Target Audience
-      - Select age ranges
-      - This is a dating app, so 18+
-   
-   f. News App
-      - Select "No"
-   
-   g. COVID-19 Contact Tracing
-      - Select "No"
-   
-   h. Data Safety
-      - Complete data collection disclosure
-      - Be honest about data collected
+2. Test on Physical Device
+   - Enable Developer Options on your Android phone
+   - Enable USB Debugging
+   - Connect via USB
+   - Run: `flutter run`
 
-4. App Details
-   
-   a. Short Description (80 chars)
-      "Find your perfect life partner with Shaadi Kro - trusted matrimony app"
-   
-   b. Full Description (4000 chars)
-      Write detailed description highlighting features
-   
-   c. App Icon
-      512x512 PNG, 32-bit
-   
-   d. Feature Graphic
-      1024x500 PNG/JPEG
-   
-   e. Screenshots
-      - Phone: At least 2 screenshots (1080x1920 or higher)
-      - 7-inch tablet: Optional
-      - 10-inch tablet: Optional
-   
-   f. Promotional Video (optional)
-      YouTube URL
+3. Share APK with Instructor/Classmates
+   - Send the app-release.apk file
+   - They can install it manually on their devices
+   - No Play Store needed!
 
-5. Pricing & Distribution
-   - Select countries
-   - Choose Free or Paid
-   - Accept distribution agreement
+4. Prepare for Demo/Presentation
+   - Test all features beforehand
+   - Ensure Firebase is working
+   - Have backup screenshots/videos ready
 
-6. Upload Release
-   
-   a. Go to Production
-   b. Click "Create new release"
-   c. Upload app-release.aab
-   d. Add release notes
-   e. Click "Next"
-   f. Review and start rollout to production
-
-STEP 8: POST-LAUNCH
--------------------
-
-1. Monitor Performance
-   - Check Play Console for crashes
-   - Monitor user reviews
-   - Track downloads
-
-2. Firebase Monitoring
-   - Enable Crashlytics
-   - Set up Analytics events
-   - Monitor performance
-
-3. Updates
-   - Increment versionCode and versionName
-   - Build new release
-   - Upload to Play Console
+OPTIONAL: If you want to distribute to multiple testers without Play Store:
+- Use Firebase App Distribution (free for up to 10,000 app installations)
+- Or simply share the APK file directly
 
 TROUBLESHOOTING
 ---------------
@@ -321,14 +283,13 @@ Common Issues:
    - Check package name matches
 
 2. APK too large
-   - Use App Bundle instead of APK
-   - Enable R8 shrinking
-   - Optimize images
+   - This is normal for Flutter apps
+   - For semester project, size doesn't matter
 
-3. Rejected by Play Store
-   - Read rejection reason carefully
-   - Fix issues mentioned
-   - Resubmit
+3. App crashes on startup
+   - Check Firebase configuration
+   - Ensure internet connection
+   - Check logcat for errors: `adb logcat`
 
 4. Firebase connection issues
    - Check internet permissions in AndroidManifest.xml
@@ -339,6 +300,6 @@ CONTACT SUPPORT
 For additional help:
 - Flutter Docs: https://docs.flutter.dev
 - Firebase Docs: https://firebase.google.com/docs
-- Play Console Help: https://support.google.com/googleplay/android-developer
+- Your course instructor/professor
 
-Good luck with your app launch! 🚀
+Good luck with your semester project presentation! 🎓🚀
