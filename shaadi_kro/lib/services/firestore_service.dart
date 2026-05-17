@@ -4,7 +4,6 @@ import '../models/profile_model.dart';
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  // Collection references
   CollectionReference get _users => _firestore.collection('users');
   CollectionReference get _profiles => _firestore.collection('profiles');
   CollectionReference get _matches => _firestore.collection('matches');
@@ -285,4 +284,6 @@ class FirestoreService {
       rethrow;
     }
   }
+
+
 }
