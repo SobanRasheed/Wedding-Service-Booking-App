@@ -187,19 +187,21 @@ class AuthController {
 
 **Files**:
 - `auth_service.dart` - Firebase Authentication API calls
-- `firestore_service.dart` - Firestore database operations
+- `firestore_service.dart` - Firestore database operations (text data only)
 
 **Responsibilities**:
 - Direct interaction with Firebase services
-- CRUD operations
-- Data persistence
-- API communication
+- CRUD operations for text-based data
+- Data persistence in Firestore
+- NO image/video storage (simplified for semester project)
 
 **Key Principle**: Services are dumb data access layers. They:
 - Execute Firebase operations
 - Return raw data
 - Don't contain business logic
 - Are called by controllers
+
+**Note**: This project does NOT use Firebase Storage. All profile data is text-based stored in Firestore only. No images or videos are uploaded from user devices.
 
 **Example**:
 ```dart

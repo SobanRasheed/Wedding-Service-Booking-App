@@ -102,19 +102,6 @@ class ProfileController {
     }
   }
 
-  /// Upload profile picture
-  Future<String> uploadProfilePicture(String userId, String imagePath) async {
-    try {
-      debugPrint('Uploading profile picture for user: $userId');
-      final url = await _firestoreService.uploadProfilePicture(userId, imagePath);
-      debugPrint('Profile picture uploaded: $url');
-      return url;
-    } catch (e) {
-      debugPrint('Upload profile picture error: $e');
-      rethrow;
-    }
-  }
-
   /// Get all profiles (for browsing/matching)
   Stream<List<ProfileModel>> getAllProfiles() {
     debugPrint('Streaming all profiles');

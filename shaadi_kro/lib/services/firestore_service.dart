@@ -1,13 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:io';
 import '../models/profile_model.dart';
 
 class FirestoreService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseStorage _storage = FirebaseStorage.instance;
 
-  // Collection references
   CollectionReference get _users => _firestore.collection('users');
   CollectionReference get _profiles => _firestore.collection('profiles');
   CollectionReference get _matches => _firestore.collection('matches');
@@ -289,44 +285,5 @@ class FirestoreService {
     }
   }
 
-  // Storage Operations - Profile Pictures
-  
-  /// Upload profile picture to Firebase Storage
-  Future<String> uploadProfilePicture(String userId, String imagePath) async {
-    try {
-      final file = File(imagePath);
-      final ref = _storage.ref().child('profile_pictures').child(userId).child('profile.jpg');
-      
-      final uploadTask = ref.putFile(file);
-      final snapshot = await uploadTask;
-      
-      final downloadUrl = await snapshot.ref.getDownloadURL();
-      return downloadUrl;
-    } catch (e) {
-      rethrow;
-    }
-  }
 
-  /// Delete profile picture
-  Future<void> deleteProfilePicture(String userId) async {
-    try {
-      final ref = _storage.ref().child('profile_pictures').child(userId).child('profile.jpg');
-      await ref.delete();
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  /// Get all profiles as a stream
-  Stream<List<ProfileModel>> getAllProfiles() {
-    return _profiles
-        .orderBy('createdAt', descending: true)
-        .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => ProfileModel.fromFirestore(
-                  doc.data() as Map<String, dynamic>,
-                  doc.id,
-                ))
-            .toList());
-  }
 }

@@ -55,29 +55,14 @@ STEP 1: FIREBASE SETUP
       - Click "Create database"
       - Choose "Production mode"
       - Select location (us-central recommended)
-   
-   c. Storage:
-      - Go to Storage
-      - Click "Get started"
-      - Use default security rules
+
+   NOTE: Firebase Storage is NOT required for this project as it only handles text-based data (no image/video uploads).
 
 4. Update Firestore Security Rules
    - Go to Firestore Database > Rules
    - Replace with the rules from README.md
 
-5. Update Storage Security Rules
-   - Go to Storage > Rules
-   - Replace with:
-   
-   rules_version = '2';
-   service firebase.storage {
-     match /b/{bucket}/o {
-       match /profile_pictures/{userId}/{allPaths=**} {
-         allow read: if true;
-         allow write: if request.auth != null && request.auth.uid == userId;
-       }
-     }
-   }
+   NOTE: Storage Security Rules are NOT needed as this project does not use Firebase Storage.
 
 STEP 2: ANDROID CONFIGURATION
 ------------------------------

@@ -2,21 +2,14 @@
 # Flutter/Dart specific
 .dart_tool/
 .build/
-.flutter-plugins
-.flutter-plugin-dependencies
-.packages
-pubspec.lock
-
-# Build outputs
-build/
-**/build/
-
-# IDE specific
-.idea/
-.vscode/
-*.iml
-*.ipr
+packages/
 *.iws
+*.sw?
+lib/generated/
+
+# Dependencies
+.pub/
+pubspec.lock
 
 # Environment variables
 .env
@@ -25,9 +18,25 @@ build/
 
 # Logs
 *.log
-**/*.log
+**/logs
 
 # OS generated files
 .DS_Store
 Thumbs.db
+
+# IDE specific
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Build outputs
+build/
+dist/
+target/
+
+# Temporary files
+*.tmp
+*.temp
 ```
